@@ -75,7 +75,7 @@ public class AccountManager {
                                 if(!account.isOverLimit(amount)) {
                                     if(Integer.parseInt(account.getPinCode())== pinNumber) {
                                         account.setDeposit(account.getAccountBalance()-amount);
-                                        transactionLog.limitUpdater(account, amount*-1);
+                                        transactionLog.limitUpdater(account, amount);
                                         isWithdrawn = true;
                                         LOG.logTransaction(Constants.DEBIT, String.valueOf(amount), account);
                                     }else {
@@ -124,7 +124,7 @@ public class AccountManager {
                             //7. Add amount to receiver
                             receiver.setDeposit(receiver.getAccountBalance()+amountToTransfer);
                             //8. Add into Log the transfer made
-                            transactionLog.limitUpdater(sender, amountToTransfer*-1);
+                            transactionLog.limitUpdater(sender, amountToTransfer);
                             //9. Update the status of transfer
                             isTransferred = true;
                             LOG.logTransaction(Constants.DEBIT, String.valueOf(amountToTransfer), sender);

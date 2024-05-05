@@ -7,7 +7,7 @@ import java.util.Date;
 // SavingsAccount class representing a savings account, extends the Account class
 public class SavingsAccount extends Account {
 	private Date dateOfBirth; // Date of birth of the account holder
-    private String gender; // Gender of the account holder
+    private GENDER gender; // Gender of the account holder
     private String phoneNumber; // Phone number of the account holder
     private int age; // Age of the account holder
 	private String name;
@@ -37,11 +37,11 @@ public class SavingsAccount extends Account {
         return this.dateOfBirth;
     }
 
-    public void setGender(String gender) {
+    public void setGender(GENDER gender) {
         this.gender = gender;
     }
 
-    public String getGender() {
+    public GENDER getGender() {
         return this.gender;
     }
 

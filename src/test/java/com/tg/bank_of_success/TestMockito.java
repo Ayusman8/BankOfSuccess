@@ -72,7 +72,6 @@ public class TestMockito {
 
         JSONObject input = testCaseObject.getJSONObject("input");
         
-        String accountNumber = input.getString("accountNumber");
         double amount = Double.parseDouble(input.getString("amount"));
         int pinNumber = Integer.parseInt(input.getString("pinNumber"));
         double initialBalance = account.getAccountBalance();
@@ -82,7 +81,7 @@ public class TestMockito {
         when(account.getAccountBalance()).thenReturn(5000.0);
 
         try {
-            isWithdrawn = manager.isWithdrawn(account, accountNumber, amount, pinNumber);
+            isWithdrawn = manager.isWithdrawn(account, amount, pinNumber);
         } catch(Exception e) {
             e.printStackTrace();
         }
@@ -97,12 +96,11 @@ public class TestMockito {
 
         JSONObject input = testCaseObject.getJSONObject("input");
         
-        String accountNumber = input.getString("accountNumber");
         double amount = Double.parseDouble(input.getString("amount"));
         int pinNumber = Integer.parseInt(input.getString("pinNumber"));
 
         assertThrows(LowBalanceException.class, () -> {
-            manager.isWithdrawn(account, accountNumber, amount, pinNumber);
+            manager.isWithdrawn(account, amount, pinNumber);
         });
     }
 
@@ -113,12 +111,11 @@ public class TestMockito {
 
         JSONObject input = testCaseObject.getJSONObject("input");
         
-        String accountNumber = input.getString("accountNumber");
         double amount = Double.parseDouble(input.getString("amount"));
         int pinNumber = Integer.parseInt(input.getString("pinNumber"));
 
         assertThrows(WrongPinNumberException.class, () -> {
-            manager.isWithdrawn(account, accountNumber, amount, pinNumber);
+            manager.isWithdrawn(account, amount, pinNumber);
         });
     }
 
@@ -129,7 +126,6 @@ public class TestMockito {
 
         JSONObject input = testCaseObject.getJSONObject("input");
         
-        String accountNumber = input.getString("accountNumber");
         double amount = Double.parseDouble(input.getString("amount"));
         int pinNumber = Integer.parseInt(input.getString("pinNumber"));
         boolean accountStatus = input.getBoolean("accountStatus");
@@ -137,7 +133,7 @@ public class TestMockito {
         when(account.getAccountStatus()).thenReturn(accountStatus);
         
         assertThrows(AccountNotActiveException.class, () -> {
-            manager.isWithdrawn(account, accountNumber, amount, pinNumber);
+            manager.isWithdrawn(account, amount, pinNumber);
         });
     }
 
@@ -148,12 +144,11 @@ public class TestMockito {
 
         JSONObject input = testCaseObject.getJSONObject("input");
         
-        String accountNumber = input.getString("accountNumber");
         double amount = Double.parseDouble(input.getString("amount"));
         int pinNumber = Integer.parseInt(input.getString("pinNumber"));
 
         assertThrows(InvalidAmountFoundException.class, () -> {
-            manager.isWithdrawn(account, accountNumber, amount, pinNumber);
+            manager.isWithdrawn(account, amount, pinNumber);
         });
     }
     
@@ -164,12 +159,11 @@ public class TestMockito {
 
         JSONObject input = testCaseObject.getJSONObject("input");
         
-        String accountNumber = input.getString("accountNumber");
         double amount = Double.parseDouble(input.getString("amount"));
         int pinNumber = Integer.parseInt(input.getString("pinNumber"));
 
         assertThrows(InvalidAmountFoundException.class, () -> {
-            manager.isWithdrawn(account, accountNumber, amount, pinNumber);
+            manager.isWithdrawn(account, amount, pinNumber);
         });
     }
 
@@ -180,7 +174,6 @@ public class TestMockito {
 
         JSONObject input = testCaseObject.getJSONObject("input");
         
-        String accountNumber = input.getString("accountNumber");
         double amount = Double.parseDouble(input.getString("amount"));
         int pinNumber = Integer.parseInt(input.getString("pinNumber"));
         boolean accountStatus = input.getBoolean("accountStatus");
@@ -188,7 +181,7 @@ public class TestMockito {
         when(account.getAccountStatus()).thenReturn(accountStatus);
 
         assertThrows(InvalidPinNumberFoundException.class, () -> {
-            manager.isWithdrawn(account, accountNumber, amount, pinNumber);
+            manager.isWithdrawn(account, amount, pinNumber);
         });
     }
 
@@ -199,7 +192,6 @@ public class TestMockito {
         
         JSONObject input = testCaseObject.getJSONObject("input");
         
-        String accountNumber = input.getString("accountNumber");
         double amount = Double.parseDouble(input.getString("amount"));
         int pinNumber = Integer.parseInt(input.getString("pinNumber"));        
         boolean accountStatus = input.getBoolean("accountStatus");
@@ -211,7 +203,7 @@ public class TestMockito {
         when(account.isOverLimit(amount)).thenReturn(availablelimit<amount);
         
         assertThrows(TransactionLimitExceeded.class, () -> {
-            manager.isWithdrawn(account, accountNumber, amount, pinNumber);
+            manager.isWithdrawn(account, amount, pinNumber);
         });
     }
     
@@ -222,7 +214,6 @@ public class TestMockito {
         
         JSONObject input = testCaseObject.getJSONObject("input");
         
-        String accountNumber = input.getString("accountNumber");
         double amount = Double.parseDouble(input.getString("amount"));
         int pinNumber = Integer.parseInt(input.getString("pinNumber"));        
         boolean accountStatus = input.getBoolean("accountStatus");
@@ -234,7 +225,7 @@ public class TestMockito {
         when(account.isOverLimit(amount)).thenReturn(availablelimit<amount);
         
         assertThrows(TransactionLimitExceeded.class, () -> {
-            manager.isWithdrawn(account, accountNumber, amount, pinNumber);
+            manager.isWithdrawn(account, amount, pinNumber);
         });
     }
     
@@ -245,7 +236,6 @@ public class TestMockito {
         
         JSONObject input = testCaseObject.getJSONObject("input");
         
-        String accountNumber = input.getString("accountNumber");
         double amount = Double.parseDouble(input.getString("amount"));
         int pinNumber = Integer.parseInt(input.getString("pinNumber"));        
         boolean accountStatus = input.getBoolean("accountStatus");
@@ -257,7 +247,7 @@ public class TestMockito {
         when(account.isOverLimit(amount)).thenReturn(availablelimit<amount);
         
         assertThrows(TransactionLimitExceeded.class, () -> {
-            manager.isWithdrawn(account, accountNumber, amount, pinNumber);
+            manager.isWithdrawn(account, amount, pinNumber);
         });
     }
     
@@ -268,7 +258,6 @@ public class TestMockito {
         
         JSONObject input = testCaseObject.getJSONObject("input");
         
-        String accountNumber = input.getString("accountNumber");
         double amount = Double.parseDouble(input.getString("amount"));
         int pinNumber = Integer.parseInt(input.getString("pinNumber"));        
         boolean accountStatus = input.getBoolean("accountStatus");
@@ -280,7 +269,7 @@ public class TestMockito {
         when(account.isOverLimit(amount)).thenReturn(availablelimit<amount);
         
         assertThrows(TransactionLimitExceeded.class, () -> {
-            manager.isWithdrawn(account, accountNumber, amount, pinNumber);
+            manager.isWithdrawn(account, amount, pinNumber);
         });
     }
 }

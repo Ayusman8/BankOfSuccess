@@ -1,7 +1,8 @@
 package com.tg.bank_of_success.utilities;
 
 // Interface for storing constants used throughout the application
-public interface Constants {
+public abstract class Constants {
+	
     // Logging levels
 	public static final String WARNING = "WARNING";
 	public static final String ERROR = "ERROR";

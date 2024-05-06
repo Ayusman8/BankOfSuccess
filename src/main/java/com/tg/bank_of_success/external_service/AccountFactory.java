@@ -9,7 +9,7 @@ public class AccountFactory {
 	
     public static Account create(String accountType){
         //Here will create either savings or current account object and return 
-       if(accountType.contains(Constants.SAVINGS)) {
+       if(accountType.equals(Constants.SAVINGS)) {
     	   return new SavingsAccount();
        }else {
     	   return new CurrentAccount();

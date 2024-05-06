@@ -12,6 +12,7 @@ import com.tg.bank_of_success.entities.GENDER;
 import com.tg.bank_of_success.entities.SavingsAccount;
 import com.tg.bank_of_success.exception.AccountNotActiveException;
 import com.tg.bank_of_success.exception.AccountNotExistException;
+import com.tg.bank_of_success.exception.BadChoiceException;
 import com.tg.bank_of_success.exception.LowBalanceException;
 import com.tg.bank_of_success.exception.TransactionLimitExceeded;
 import com.tg.bank_of_success.exception.WrongPinNumberException;
@@ -29,7 +30,6 @@ public class AccountController {
 
     // Manager instance for managing accounts
     AccountManager manager = new AccountManager();
-    AccountRepository accountRepository = new AccountRepository();
     Scanner sc = new Scanner(System.in);
 
     // Start the account management system
@@ -48,7 +48,7 @@ public class AccountController {
                 // Open new accounts
                 Account account = null;
                 account = open(account);
-                accountRepository.addAccount(account);
+                manager.addAccount(account);
                 break;
 
             case 2:
@@ -56,8 +56,8 @@ public class AccountController {
                 System.out.println("Enter your account number");
                 accountNumber = sc.nextLine();
                 
-                if (accountRepository.getAccountByAccountNumber(accountNumber) != null) {
-                    initiateDeposit(accountRepository.getAccountByAccountNumber(accountNumber));
+                if (manager.getAccountByAccountNumber(accountNumber) != null) {
+                    initiateDeposit(manager.getAccountByAccountNumber(accountNumber));
                 } else {
                     throw new AccountNotExistException("No account created yet");
                 }
@@ -68,8 +68,8 @@ public class AccountController {
                 System.out.println("Enter your account number");
                 accountNumber = sc.nextLine();
                 
-                if (accountRepository.getAccountByAccountNumber(accountNumber) != null) {
-                    initiateTransaction(accountRepository.getAccountByAccountNumber(accountNumber));
+                if (manager.getAccountByAccountNumber(accountNumber) != null) {
+                    initiateTransaction(manager.getAccountByAccountNumber(accountNumber));
                 } else {
                     throw new AccountNotExistException("No account created yet");
                 }
@@ -83,8 +83,8 @@ public class AccountController {
                 String receiverAccountNumber = sc.nextLine();
                 
                 // Transfer funds between accounts
-                Account sender = accountRepository.getAccountByAccountNumber(senderAccountNumber);
-                Account reciver = accountRepository.getAccountByAccountNumber(receiverAccountNumber);
+                Account sender = manager.getAccountByAccountNumber(senderAccountNumber);
+                Account reciver = manager.getAccountByAccountNumber(receiverAccountNumber);
                 if (sender != null && reciver != null) {
                     initiateTransfer(sender, reciver);
                 } else {
@@ -98,9 +98,9 @@ public class AccountController {
                 accountNumber = sc.nextLine();
                 System.out.println("Enter your pin number");
                 String pinNumber = sc.nextLine();
-                if (accountRepository.getAccountByAccountNumber(accountNumber) != null) {
+                if (manager.getAccountByAccountNumber(accountNumber) != null) {
                     try {
-                        manager.showAccountBalance(accountRepository.getAccountByAccountNumber(accountNumber), pinNumber);
+                        manager.showAccountBalance(manager.getAccountByAccountNumber(accountNumber), pinNumber);
                     }catch(WrongPinNumberException e) {
                         log.log(Constants.WARNING, "AccountManager " + "- showAccountBalance method - " + " " + e.getMessage());
                     }
@@ -113,8 +113,8 @@ public class AccountController {
                 // Close an account
                 System.out.println("Enter your account number");
                 accountNumber = sc.nextLine();
-                if (accountRepository.getAccountByAccountNumber(accountNumber) != null) {
-                    manager.showAccountInformation(accountRepository.getAccountByAccountNumber(accountNumber));
+                if (manager.getAccountByAccountNumber(accountNumber) != null) {
+                    manager.showAccountInformation(manager.getAccountByAccountNumber(accountNumber));
                     } else {
                     throw new AccountNotExistException("No account created yet");
                 }
@@ -124,8 +124,8 @@ public class AccountController {
                 // Close an account
                 System.out.println("Enter your account number");
                 accountNumber = sc.nextLine();
-                if (accountRepository.getAccountByAccountNumber(accountNumber) != null) {
-                    close(accountRepository.getAccountByAccountNumber(accountNumber));
+                if (manager.getAccountByAccountNumber(accountNumber) != null) {
+                    close(manager.getAccountByAccountNumber(accountNumber));
                 } else {
                     throw new AccountNotExistException("No account created yet");
                 }
@@ -266,10 +266,19 @@ public class AccountController {
     // Accept the user's choice of account type
     private String acceptUserChoice() {
 
-        System.out.println("What type of account you want to open(Savings/Current)");
-        String choice = sc.nextLine();
-        choice = choice.toLowerCase();
-        return choice;
+        System.out.println("What type of account you want to open \n1. Savings\n2. Current");
+        int choice = Integer.parseInt(sc.nextLine());
+        
+        switch (choice) {
+		case 1:
+			return Constants.SAVINGS;
+
+		case 2:
+			return Constants.CURRENT;
+			
+		default:
+			throw new BadChoiceException("Bad Choice! Try Again");
+        }
     }
 
     // Create an account based on the account type should be implemented in account
@@ -278,7 +287,7 @@ public class AccountController {
 
         Account account = AccountFactory.create(accountType);
         getCommonAccountInformarion(account);
-        if (accountType.contains(Constants.SAVINGS)) {
+        if (accountType.equals(Constants.SAVINGS)) {
             savingsAccountinformation(account);
         } else {
             currentAccountInformation(account);

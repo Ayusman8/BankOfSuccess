@@ -48,7 +48,7 @@ public class TestMockito {
         JSONTokener tokener = null;
         try {
             // Change the file path according to your file location
-            tokener = new JSONTokener(new FileReader("C:\\Users\\oneay\\BACKUP\\TALENCIA\\Test Case.json"));
+            tokener = new JSONTokener(new FileReader("Test_Input//Test Case.json"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

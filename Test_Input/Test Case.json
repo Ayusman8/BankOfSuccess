@@ -1,0 +1,126 @@
+{
+  "test_cases": [
+    {
+      "name": "Test Case happy",
+      "input": {
+          "availableLimit" : "25000",
+          "accountNumber" : "1000109021",
+          "accountBalance" : "5000",
+          "accountStatus" : true,
+          "pinNumber" : "1234",
+          "amount" : "500"
+      }
+    },
+    {
+      "name": "Test Case lowBalance",
+      "input": {
+          "privilage" : "SILVER",
+          "availableLimit" : "25000",
+          "accountNumber" : "1000109021",
+          "accountBalance" : "5000",
+          "accountStatus" : true,
+          "pinNumber" : "1234",
+          "amount" : "10000"
+      }
+    },
+    {
+      "name": "Test Case wrongPin",
+      "input": {
+          "availableLimit" : "25000",
+          "accountNumber" : "1000109021",
+          "accountBalance" : "5000",
+          "accountStatus" : true,
+          "pinNumber" : "1324",
+          "amount" : "500"
+      }
+    },
+    {
+      "name": "Test Case inactiveAccount",
+      "input": {
+          "availableLimit" : "25000",
+          "accountNumber" : "1000109021",
+          "accountBalance" : "5000",
+          "accountStatus" : false,
+          "pinNumber" : "1234",
+          "amount" : "500"
+      }
+    },
+    {
+      "name": "Test Case negativeAmount",
+      "input": {
+          "availableLimit" : "25000",
+          "accountNumber" : "1000109021",
+          "accountBalance" : "5000",
+          "accountStatus" : true,
+          "pinNumber" : "1234",
+          "amount" : "-500"
+      }
+    },
+    {
+      "name": "Test Case negativePin",
+      "input": {
+          "availableLimit" : "25000",
+          "accountNumber" : "1000109021",
+          "accountBalance" : "5000",
+          "accountStatus" : true,
+          "pinNumber" : "-1234",
+          "amount" : "500"
+      }
+    },
+    {
+      "name": "Test Case largeAmount",
+      "input": {
+          "availableLimit" : "100000",
+          "accountNumber" : "1000109021",
+          "accountBalance" : "2000000",
+          "accountStatus" : true,
+          "pinNumber" : "1234",
+          "amount" : "1500000"
+      }
+    },
+    {
+      "name": "Test Case silver",
+      "input": {
+          "availableLimit" : "25000",
+          "accountNumber" : "1000109021",
+          "accountBalance" : "100000",
+          "accountStatus" : true,
+          "pinNumber" : "1234",
+          "amount" : "30000"
+      }
+    },
+    {
+      "name": "Test Case gold",
+      "input": {
+          "availableLimit" : "50000",
+          "accountNumber" : "1000109021",
+          "accountBalance" : "100000",
+          "accountStatus" : true,
+          "pinNumber" : "1234",
+          "amount" : "60000"
+      }
+    },
+    {
+      "name": "Test Case platinum",
+      "input": {
+          "availableLimit" : "100000",
+          "accountNumber" : "1000109021",
+          "accountBalance" : "120000",
+          "accountStatus" : true,
+          "pinNumber" : "1234",
+          "amount" : "110000"
+      }
+    },
+    {
+      "name": "Test Case zeroAmount",
+      "input": {
+          "availableLimit" : "100000",
+          "accountNumber" : "1000109021",
+          "accountBalance" : "120000",
+          "accountStatus" : true,
+          "pinNumber" : "1234",
+          "amount" : "0"
+      }
+    }
+  ]
+}

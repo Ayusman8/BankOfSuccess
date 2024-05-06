@@ -8,6 +8,7 @@ import com.tg.bank_of_success.entities.Account;
 import com.tg.bank_of_success.entities.CurrentAccount;
 import com.tg.bank_of_success.entities.SavingsAccount;
 import com.tg.bank_of_success.exception.AccountNotActiveException;
+import com.tg.bank_of_success.exception.AccountNotExistException;
 import com.tg.bank_of_success.exception.InvalidAmountFoundException;
 import com.tg.bank_of_success.exception.InvalidPinNumberFoundException;
 import com.tg.bank_of_success.exception.LowBalanceException;
@@ -17,6 +18,7 @@ import com.tg.bank_of_success.exception.WrongAccountNumberFoundException;
 import com.tg.bank_of_success.exception.WrongPinNumberException;
 import com.tg.bank_of_success.external_service.AccountImplFactory;
 import com.tg.bank_of_success.external_service.IAccount;
+import com.tg.bank_of_success.repository.AccountRepository;
 import com.tg.bank_of_success.utilities.Constants;
 import com.tg.bank_of_success.utilities.LogHandlerV1;
 import com.tg.bank_of_success.utilities.TransactionLog;
@@ -26,6 +28,8 @@ public class AccountManager {
 	// Initialize LogHandlerV1 and TransactionLog
 	private static final LogHandlerV1 LOG = new LogHandlerV1();
 	private TransactionLog transactionLog = new TransactionLog();
+    private AccountRepository accountRepository = new AccountRepository();
+
 
 	// Method to open an account
 	public boolean open(Account account) {
@@ -224,5 +228,15 @@ public class AccountManager {
 			LOG.log(Constants.INFO, "Account is already deactivated");
 			return false;
 		}
+	}
+
+	public Account getAccountByAccountNumber(String accountNumber) throws AccountNotExistException {
+		
+		return accountRepository.getAccountByAccountNumber(accountNumber);
+	}
+
+	public void addAccount(Account account) {
+
+		accountRepository.addAccount(account);
 	}
 }

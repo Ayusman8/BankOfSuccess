@@ -7,7 +7,7 @@ import com.tg.bank_of_success.utilities.Constants;
 
 public abstract class Account {
 	
-	private String accountType = null;
+	private String accountType;
 	private double availableLimit;
 	private long id;
 	private String accountNumber;

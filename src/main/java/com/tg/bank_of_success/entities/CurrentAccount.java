@@ -3,9 +3,9 @@ package com.tg.bank_of_success.entities;
 // Represents a current account, which is a type of Account
 public class CurrentAccount extends Account {
     // Additional attributes specific to current accounts
-    String companyName;
-    String userWebsite;
-    String registrationNumber;
+    private String companyName;
+    private String userWebsite;
+    private String registrationNumber;
 
     // Getter and Setters
     public void setCompanyName(String companyName) {
